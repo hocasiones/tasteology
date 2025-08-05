@@ -1,11 +1,20 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import '@fontsource/open-sans'
+import Section1 from '@/components/Section1.vue'
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div class="container mx-auto px-[15px]">
+    <Section1 />
+  </div>
 </template>
 
-<style scoped></style>
+<style>
+@import 'tailwindcss';
+
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Open Sans Variable', sans-serif;
+}
+</style>
