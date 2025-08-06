@@ -1,13 +1,14 @@
 <script setup lang="ts">
+import ImageOverlay from '@/components//ImageOverlay.vue'
 import { GET_SECTION_2 } from '@/graphql/queries'
 import { useQuery } from '@vue/apollo-composable'
-import { computed, watch } from 'vue'
+import { computed } from 'vue'
 
 const { result: section2Result } = useQuery(GET_SECTION_2)
 
-watch(section2Result, () => {
-  console.log(section2Result.value)
-})
+// watch(section2Result, () => {
+//   console.log(section2Result.value)
+// })
 
 const result = computed(() => section2Result.value?.posts ?? null)
 </script>
@@ -23,9 +24,19 @@ const result = computed(() => section2Result.value?.posts ?? null)
     </div>
     <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
       <div v-for="value in result" :key="value.id">
-        <img :src="value.featuredImage.url" alt="" class="mb-[30px]" />
+        <ImageOverlay :src="value.featuredImage.url"
+          ><img :src="value.featuredImage.url" alt="" class="mb-[30px]"
+        /></ImageOverlay>
         <article>
-          <h3>{{ value.title }}</h3>
+          <a
+            href="/"
+            @click.stop.prevent="
+              (e) => {
+                console.log(e.target)
+              }
+            "
+            ><h3>{{ value.title }}</h3></a
+          >
           <div v-html="value.content"></div>
         </article>
       </div>

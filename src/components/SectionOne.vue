@@ -2,6 +2,7 @@
 import { GET_SECTION_1, GET_MEDIA } from '@/graphql/queries'
 import { useQuery } from '@vue/apollo-composable'
 import { watch, ref, computed } from 'vue'
+import ImageOverlay from '@/components/ImageOverlay.vue'
 
 const mediaIDs = ref<number[]>([])
 
@@ -29,9 +30,17 @@ const media = computed(() => mediaResult?.value?.mediaItems ?? null)
 
 <template>
   <div class="section-1 py-[60px] lg:py-[120px] columns-1 sm:columns-2 lg:columns-3 gap-[15px]">
-    <img v-for="value in media" :key="value.id" :src="value.url" alt="" class="mb-[15px]" />
+    <ImageOverlay v-for="value in media" :key="value.id" :src="value.url"
+      ><img :src="value.url" alt="" class="mb-[15px]"
+    /></ImageOverlay>
     <div class="pl-[15px] overflow-hidden">
-      <a href="/"
+      <a
+        href="/"
+        @click.stop.prevent="
+          (e) => {
+            console.log(e.target)
+          }
+        "
         ><h2
           class="text-[30px] font-light leading-[1.1] tracking-[1.5px] text-white pb-[30px] mb-[30px] border-b border-[#ccc] text-left"
         >
