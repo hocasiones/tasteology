@@ -10,24 +10,3 @@ import SectionTwo from './components/SectionTwo.vue'
     <SectionTwo />
   </div>
 </template>
-
-<style>
-@import 'tailwindcss';
-
-body {
-  background-color: #000;
-  color: #fff;
-  font-family: 'Open Sans Variable', sans-serif;
-}
-p {
-  font-size: 21px;
-  font-weight: 300;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.43;
-  letter-spacing: normal;
-  text-align: left;
-  color: #fff;
-  margin-bottom: 30px;
-}
-</style>
