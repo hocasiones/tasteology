@@ -1,6 +1,13 @@
-# .
+#
 
-This template should help get you started developing with Vue 3 in Vite.
+I decided to build this assessment test using Vue 3 since you are looking for someone who is knowledgeable with Vue though I can also build it using React.
+
+All the stack I used for this assessment test are the following:
+Vue
+Tailwind
+ShadcnUI
+Apollo Client / GraphQL
+Wordpress (CMS/Backend)
 
 ## Recommended IDE Setup
 
