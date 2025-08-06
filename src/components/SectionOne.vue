@@ -3,11 +3,12 @@ import { GET_SECTION_1, GET_MEDIA } from '@/graphql/queries'
 import { useQuery } from '@vue/apollo-composable'
 import { watch, ref, computed } from 'vue'
 import ImageOverlay from '@/components/ImageOverlay.vue'
+import { Skeleton } from '@/components/ui/skeleton'
 
 const mediaIDs = ref<number[]>([])
 
 const { result: section1Result } = useQuery(GET_SECTION_1)
-const { result: mediaResult } = useQuery(GET_MEDIA, {
+const { result: mediaResult, loading: mediaLoading } = useQuery(GET_MEDIA, {
   ids: mediaIDs,
 })
 
@@ -20,16 +21,20 @@ watch(section1Result, () => {
   // console.log(section1Result.value)
 })
 
-// watch(mediaResult, () => {
-//   console.log(mediaResult.value)
+// watch(section1Loading, () => {
+//   console.log(section1Loading.value)
 // })
 
 const page = computed(() => section1Result.value?.page ?? null)
 const media = computed(() => mediaResult?.value?.mediaItems ?? null)
+const mLoading = computed(() => mediaLoading.value ?? null)
 </script>
 
 <template>
-  <div class="section-1 py-[60px] lg:py-[120px] columns-1 sm:columns-2 lg:columns-3 gap-[15px]">
+  <div
+    v-if="!mLoading"
+    class="section-1 py-[60px] lg:py-[120px] columns-1 sm:columns-2 lg:columns-3 gap-[15px]"
+  >
     <ImageOverlay v-for="value in media" :key="value.id" :src="value.url"
       ><img :src="value.url" alt="" class="mb-[15px]"
     /></ImageOverlay>
@@ -48,6 +53,33 @@ const media = computed(() => mediaResult?.value?.mediaItems ?? null)
         </h2></a
       >
       <div v-html="page?.section_1_description"></div>
+    </div>
+  </div>
+
+  <div
+    v-if="mLoading"
+    class="section-1 py-[60px] lg:py-[120px] columns-1 sm:columns-2 lg:columns-3 gap-[15px]"
+  >
+    <Skeleton class="w-[406px] h-[659px] bg-gray-400 mb-2 overflow-hidden" />
+    <Skeleton class="w-[406px] h-[322px] bg-gray-400 mb-2 overflow-hidden" />
+    <Skeleton class="w-[406px] h-[322px] bg-gray-400 mb-2 overflow-hidden" />
+    <div class="pl-[15px] overflow-hidden">
+      <Skeleton class="w-[100%] h-10 rounded-full bg-gray-400 mb-2" />
+      <hr class="my-[30px]" />
+      <Skeleton class="w-[100%] h-5 rounded-full bg-gray-400 mb-2" />
+      <Skeleton class="w-[100%] h-5 rounded-full bg-gray-400 mb-2" />
+      <Skeleton class="w-[100%] h-5 rounded-full bg-gray-400 mb-2" />
+      <Skeleton class="w-[100%] h-5 rounded-full bg-gray-400 mb-2" />
+      <br />
+      <Skeleton class="w-[100%] h-5 rounded-full bg-gray-400 mb-2" />
+      <Skeleton class="w-[100%] h-5 rounded-full bg-gray-400 mb-2" />
+      <Skeleton class="w-[100%] h-5 rounded-full bg-gray-400 mb-2" />
+      <Skeleton class="w-[100%] h-5 rounded-full bg-gray-400 mb-2" />
+      <br />
+      <Skeleton class="w-[100%] h-5 rounded-full bg-gray-400 mb-2" />
+      <Skeleton class="w-[100%] h-5 rounded-full bg-gray-400 mb-2" />
+      <Skeleton class="w-[100%] h-5 rounded-full bg-gray-400 mb-2" />
+      <Skeleton class="w-[100%] h-5 rounded-full bg-gray-400 mb-2" />
     </div>
   </div>
 </template>
