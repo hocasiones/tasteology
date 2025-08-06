@@ -13,13 +13,17 @@ const result = computed(() => section2Result.value?.posts ?? null)
 </script>
 
 <template>
-  <div class="py-[60px] lg:py-[120px]">
+  <div class="section-2 py-[60px] lg:py-[120px]">
     <div class="flex justify-center mb-[30px]">
-      <div class="title">Taste the Colours</div>
+      <div
+        class="text-[30px] font-light leading-[1.1] tracking-[1.5px] text-white pb-[30px] border-b border-[#fff] uppercase"
+      >
+        Taste the Colours
+      </div>
     </div>
     <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
       <div v-for="value in result" :key="value.id">
-        <img :src="value.featuredImage.url" alt="" />
+        <img :src="value.featuredImage.url" alt="" class="mb-[30px]" />
         <article>
           <h3>{{ value.title }}</h3>
           <div v-html="value.content"></div>
@@ -29,24 +33,8 @@ const result = computed(() => section2Result.value?.posts ?? null)
   </div>
 </template>
 
-<style scoped>
-.title {
-  font-size: 30px;
-  font-weight: 300;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.1;
-  letter-spacing: 1.5px;
-  text-align: center;
-  color: #fff;
-  text-transform: uppercase;
-  padding-bottom: 30px;
-  border-bottom: 1px solid #fff;
-}
-img {
-  margin-bottom: 30px;
-}
-article {
+<style>
+.section-2 article {
   text-align: center;
   padding: 0 30px;
   h3 {

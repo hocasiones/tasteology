@@ -15,7 +15,7 @@ const GET_SECTION_1 = gql`
 
 const GET_SECTION_2 = gql`
   query Colours {
-    posts {
+    posts(sort: { order: ASC }) {
       id
       title
       content
