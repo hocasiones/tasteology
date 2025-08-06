@@ -1,39 +1,30 @@
-<script lang="ts">
+<script setup lang="ts">
 import { GET_SECTION_1, GET_MEDIA } from '@/graphql/queries'
 import { useQuery } from '@vue/apollo-composable'
 import { watch, ref, computed } from 'vue'
 
-export default {
-  setup() {
-    const mediaIDs = ref<number[]>([])
+const mediaIDs = ref<number[]>([])
 
-    const { result: section1Result } = useQuery(GET_SECTION_1)
-    const { result: mediaResult, loading: mediaLoading } = useQuery(GET_MEDIA, {
-      ids: mediaIDs,
-    })
+const { result: section1Result } = useQuery(GET_SECTION_1)
+const { result: mediaResult } = useQuery(GET_MEDIA, {
+  ids: mediaIDs,
+})
 
-    watch(section1Result, () => {
-      mediaIDs.value = [
-        section1Result.value.page.section_1_image_1,
-        section1Result.value.page.section_1_image_2,
-        section1Result.value.page.section_1_image_3,
-      ]
-      console.log(section1Result.value)
-    })
+watch(section1Result, () => {
+  mediaIDs.value = [
+    section1Result.value.page.section_1_image_1,
+    section1Result.value.page.section_1_image_2,
+    section1Result.value.page.section_1_image_3,
+  ]
+  // console.log(section1Result.value)
+})
 
-    watch(mediaResult, () => {
-      console.log(mediaResult.value)
-    })
+// watch(mediaResult, () => {
+//   console.log(mediaResult.value)
+// })
 
-    const page = computed(() => section1Result.value?.page ?? null)
-    const media = computed(() => mediaResult?.value?.mediaItems ?? null)
-
-    return {
-      page,
-      media,
-    }
-  },
-}
+const page = computed(() => section1Result.value?.page ?? null)
+const media = computed(() => mediaResult?.value?.mediaItems ?? null)
 </script>
 
 <template>

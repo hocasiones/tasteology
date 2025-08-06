@@ -19,6 +19,9 @@ const GET_SECTION_2 = gql`
       id
       title
       content
+      featuredImage {
+        url
+      }
     }
   }
 `
